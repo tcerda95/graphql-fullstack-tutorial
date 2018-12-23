@@ -1,0 +1,23 @@
+type Link {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  url: String!
+  description: String!
+  postedBy: User! @relation(link: INLINE)
+  votes: [Vote!]!
+}
+
+type User {
+  id: ID! @id
+  name: String!
+  email: String! @unique
+  password: String!
+  links: [Link!]!
+  votes: [Vote!]!
+}
+
+type Vote {
+  id: ID! @id
+  link: Link! @relation(link: INLINE)
+  user: User! @relation(link: INLINE)
+}
